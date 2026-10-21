@@ -1,21 +1,452 @@
----
-sidebar_position: 1
-title: Introduction
----
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSIS SMK DT Full Day</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+:root {
+  --primary: #1e3a8a;
+  --secondary: #dc2626;
+  --accent: #fbbf24;
+  --dark: #0f172a;
+  --light: #f8fafc;
+  --gradient: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%);
+}
+body { background: #f1f5f9; color: var(--dark); line-height: 1.6; }
 
-# Introduction
+/* NAVBAR */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+}
+.logo { display: flex; align-items: center; gap: 10px; font-weight: bold; color: var(--primary); font-size: 1.2rem; }
+.logo-icon { width: 40px; height: 40px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+.nav-links { display: flex; gap: 25px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: var(--secondary); }
+.nav-btn { background: var(--gradient); color: white; padding: 8px 20px; border: none; border-radius: 25px; cursor: pointer; font-weight: 500; }
+.menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
 
-DOM Cloud is a shared hosting service providing you a flexible yet efficient hosting solution for everyone like you. See [our mission](./mission.mdx) for why we build this!
+/* HERO */
+.hero {
+  min-height: 100vh; background: var(--gradient); color: white;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: 100px 20px 50px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="white" opacity="0.3"/><circle cx="80" cy="40" r="1.5" fill="white" opacity="0.2"/><circle cx="40" cy="70" r="1" fill="white" opacity="0.3"/></svg>');
+  opacity: 0.5;
+}
+.hero-content { position: relative; z-index: 1; max-width: 900px; }
+.hero h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+.hero p { font-size: 1.3rem; margin-bottom: 30px; opacity: 0.95; }
+.hero-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 25px; margin-bottom: 20px; backdrop-filter: blur(10px); }
 
-As a shared hosting platform, your usage in the server is restricted by many [security features](./security.mdx) that we have.
+/* SECTIONS */
+section { padding: 80px 5%; }
+.section-title { text-align: center; margin-bottom: 50px; }
+.section-title h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+.section-title p { color: #64748b; font-size: 1.1rem; }
+.section-title::after {
+  content: ''; display: block; width: 80px; height: 4px;
+  background: var(--gradient); margin: 15px auto; border-radius: 2px;
+}
 
-## Getting Started
+/* VISI MISI */
+.visi-misi { background: white; }
+.vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; }
+.vm-card {
+  background: white; padding: 40px; border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-left: 5px solid var(--primary);
+  transition: 0.3s;
+}
+.vm-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.12); }
+.vm-card.misi { border-left-color: var(--secondary); }
+.vm-card h3 { color: var(--primary); font-size: 1.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.vm-card.misi h3 { color: var(--secondary); }
+.vm-card ul { list-style: none; }
+.vm-card li { padding: 10px 0; padding-left: 30px; position: relative; }
+.vm-card li::before {
+  content: '✓'; position: absolute; left: 0; color: var(--primary);
+  font-weight: bold; background: #dbeafe; width: 22px; height: 22px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;
+}
+.vm-card.misi li::before { color: var(--secondary); background: #fee2e2; }
 
-First time here? Get understand and set up your own website quicky by reading the [Getting Started](./getting-started.mdx) page.
+/* KABINET */
+.kabinet-section { background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%); }
+.kabinet-header {
+  text-align: center; background: white; padding: 40px; border-radius: 20px;
+  max-width: 800px; margin: 0 auto 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.kabinet-header h3 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
+.kabinet-header .periode { color: #64748b; font-size: 1.1rem; }
+.susunan-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px; max-width: 1200px; margin: 0 auto;
+}
+.anggota-card {
+  background: white; border-radius: 15px; overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: 0.3s; text-align: center;
+}
+.anggota-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+.anggota-photo {
+  width: 100%; height: 250px; background: var(--gradient);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 4rem; font-weight: bold; overflow: hidden;
+}
+.anggota-photo img { width: 100%; height: 100%; object-fit: cover; }
+.anggota-info { padding: 20px; }
+.anggota-info h4 { color: var(--primary); margin-bottom: 5px; font-size: 1.1rem; }
+.anggota-info .jabatan {
+  display: inline-block; background: var(--gradient); color: white;
+  padding: 4px 15px; border-radius: 15px; font-size: 0.85rem; margin-top: 8px;
+}
 
-## Our Services
+/* PROKER */
+.proker-section { background: white; }
+.proker-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px; max-width: 1200px; margin: 0 auto;
+}
+.proker-card {
+  background: white; border-radius: 15px; padding: 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08); border-top: 4px solid var(--primary);
+  transition: 0.3s;
+}
+.proker-card:hover { transform: translateY(-5px); }
+.proker-icon {
+  width: 60px; height: 60px; background: var(--gradient); border-radius: 15px;
+  display: flex; align-items: center; justify-content: center; color: white;
+  font-size: 1.8rem; margin-bottom: 20px;
+}
+.proker-card h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
+.proker-card p { color: #64748b; }
 
-Please read our [Free Plan Guide](./free-plan.mdx) to know what limitations are in set for using our services freely. You also need [an invite code](./invitation-code.mdx) to enjoy our free plan.
+/* GALERI */
+.galeri-section { background: #f8fafc; }
+.galeri-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+.tab-btn {
+  padding: 10px 25px; border: 2px solid var(--primary); background: white;
+  color: var(--primary); border-radius: 25px; cursor: pointer; font-weight: 500; transition: 0.3s;
+}
+.tab-btn.active { background: var(--gradient); color: white; border-color: transparent; }
+.galeri-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px; max-width: 1200px; margin: 0 auto;
+}
+.media-card {
+  border-radius: 15px; overflow: hidden; background: white;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: 0.3s; cursor: pointer;
+}
+.media-card:hover { transform: scale(1.02); }
+.media-card img, .media-card video { width: 100%; height: 220px; object-fit: cover; display: block; }
+.media-caption { padding: 15px; }
+.media-caption h5 { color: var(--primary); margin-bottom: 5px; }
+.media-caption small { color: #64748b; }
+.empty-state { text-align: center; padding: 60px 20px; color: #94a3b8; grid-column: 1/-1; }
 
-We also have a page to compare [between our plans](./compare-plans.mdx) and [our servers](./compare-server.mdx). We also have an option for self-hosting if you wish to [have your own infra cloud](./self-hosting.mdx) hosted here.
+/* SOSMED */
+.sosmed-section { background: var(--gradient); color: white; text-align: center; }
+.sosmed-section .section-title h2 { color: white; }
+.sosmed-section .section-title p { color: rgba(255,255,255,0.9); }
+.sosmed-grid {
+  display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+  max-width: 800px; margin: 0 auto;
+}
+.sosmed-link {
+  display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.15);
+  padding: 15px 25px; border-radius: 50px; color: white; text-decoration: none;
+  backdrop-filter: blur(10px); transition: 0.3s; font-weight: 500;
+}
+.sosmed-link:hover { background: white; color: var(--primary); transform: translateY(-3px); }
+.sosmed-icon { font-size: 1.5rem; }
 
+/* FOOTER */
+footer { background: var(--dark); color: white; text-align: center; padding: 30px 20px; }
+footer p { opacity: 0.8; }
+
+/* ADMIN PANEL */
+.admin-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  z-index: 2000; align-items: center; justify-content: center; padding: 20px;
+}
+.admin-overlay.active { display: flex; }
+.admin-panel {
+  background: white; border-radius: 20px; width: 100%; max-width: 1100px;
+  max-height: 90vh; overflow: hidden; display: flex; flex-direction: column;
+}
+.admin-header {
+  background: var(--gradient); color: white; padding: 20px 30px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.admin-header h2 { font-size: 1.5rem; }
+.close-btn { background: rgba(255,255,255,0.2); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
+.admin-body { display: flex; flex: 1; overflow: hidden; }
+.admin-sidebar {
+  width: 220px; background: #f8fafc; padding: 20px 0;
+  border-right: 1px solid #e2e8f0; overflow-y: auto;
+}
+.admin-tab {
+  padding: 12px 25px; cursor: pointer; border: none; background: none;
+  width: 100%; text-align: left; font-size: 0.95rem; color: #475569; transition: 0.2s;
+}
+.admin-tab:hover { background: #e2e8f0; }
+.admin-tab.active { background: var(--gradient); color: white; font-weight: 500; }
+.admin-content { flex: 1; padding: 30px; overflow-y: auto; }
+.admin-section { display: none; }
+.admin-section.active { display: block; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--dark); }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 10px 15px; border: 2px solid #e2e8f0; border-radius: 8px;
+  font-size: 1rem; transition: 0.2s; font-family: inherit;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  outline: none; border-color: var(--primary);
+}
+.form-group textarea { resize: vertical; min-height: 80px; }
+.btn {
+  padding: 10px 25px; border: none; border-radius: 8px; cursor: pointer;
+  font-weight: 500; transition: 0.2s; font-size: 0.95rem;
+}
+.btn-primary { background: var(--gradient); color: white; }
+.btn-primary:hover { opacity: 0.9; }
+.btn-danger { background: #dc2626; color: white; }
+.btn-secondary { background: #e2e8f0; color: var(--dark); }
+.btn-sm { padding: 6px 12px; font-size: 0.85rem; }
+.item-list { display: flex; flex-direction: column; gap: 15px; }
+.item-row {
+  background: #f8fafc; padding: 15px; border-radius: 10px;
+  display: flex; gap: 15px; align-items: center;
+}
+.item-row img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
+.item-row .info { flex: 1; }
+.item-row .info strong { display: block; margin-bottom: 3px; }
+.item-row .info small { color: #64748b; }
+.item-actions { display: flex; gap: 8px; }
+
+/* LOGIN */
+.login-form { max-width: 400px; margin: 0 auto; }
+.login-form h3 { margin-bottom: 20px; text-align: center; color: var(--primary); }
+
+/* MODAL */
+.modal {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+  z-index: 3000; align-items: center; justify-content: center; padding: 20px;
+}
+.modal.active { display: flex; }
+.modal-content { max-width: 90%; max-height: 90vh; }
+.modal-content img, .modal-content video { max-width: 100%; max-height: 85vh; border-radius: 10px; }
+.modal-close { position: absolute; top: 20px; right: 30px; background: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+  .nav-links.active { display: flex; }
+  .menu-toggle { display: block; }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .vm-grid { grid-template-columns: 1fr; }
+  .admin-body { flex-direction: column; }
+  .admin-sidebar { width: 100%; display: flex; overflow-x: auto; padding: 10px; }
+  .admin-tab { white-space: nowrap; width: auto; }
+  .section-title h2 { font-size: 1.8rem; }
+}
+
+.toast {
+  position: fixed; bottom: 30px; right: 30px; background: #10b981; color: white;
+  padding: 15px 25px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  z-index: 4000; transform: translateX(400px); transition: 0.3s;
+}
+.toast.show { transform: translateX(0); }
+.toast.error { background: #dc2626; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <div class="logo-icon">DT</div>
+    <span>OSIS SMK DT</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Beranda</a></li>
+    <li><a href="#visi-misi">Visi Misi</a></li>
+    <li><a href="#kabinet">Kabinet</a></li>
+    <li><a href="#proker">Program Kerja</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#sosmed">Sosial Media</a></li>
+  </ul>
+  <button class="nav-btn" onclick="openAdmin()">🔐 Admin</button>
+  <button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge" id="heroBadge">Periode 2025/2026</div>
+    <h1 id="heroTitle">OSIS SMK DT Full Day</h1>
+    <p id="heroSubtitle">Bersama Membangun Generasi Unggul, Berkarakter, dan Berprestasi</p>
+    <button class="nav-btn" style="padding: 12px 30px; font-size: 1rem;" onclick="document.getElementById('kabinet').scrollIntoView({behavior:'smooth'})">Kenali Kabinet Kami →</button>
+  </div>
+</section>
+
+<!-- VISI MISI -->
+<section class="visi-misi" id="visi-misi">
+  <div class="section-title">
+    <h2>Visi & Misi</h2>
+    <p>Landasan perjuangan kami</p>
+  </div>
+  <div class="vm-grid">
+    <div class="vm-card">
+      <h3>🎯 Visi</h3>
+      <p id="visiText">Mewujudkan OSIS SMK DT Full Day sebagai organisasi yang unggul, kreatif, dan berakhlak mulia dalam membentuk generasi muda yang siap menghadapi tantangan global.</p>
+    </div>
+    <div class="vm-card misi">
+      <h3>🚀 Misi</h3>
+      <ul id="misiList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- KABINET -->
+<section class="kabinet-section" id="kabinet">
+  <div class="section-title">
+    <h2>Susunan Kabinet</h2>
+    <p>Pengurus OSIS Periode Aktif</p>
+  </div>
+  <div class="kabinet-header">
+    <h3 id="kabinetNama">KABINET PRESTASI</h3>
+    <div class="periode" id="kabinetPeriode">Periode 2025/2026</div>
+  </div>
+  <div class="susunan-grid" id="susunanGrid"></div>
+</section>
+
+<!-- PROKER -->
+<section class="proker-section" id="proker">
+  <div class="section-title">
+    <h2>Program Kerja</h2>
+    <p>Rencana kegiatan unggulan kami</p>
+  </div>
+  <div class="proker-grid" id="prokerGrid"></div>
+</section>
+
+<!-- GALERI -->
+<section class="galeri-section" id="galeri">
+  <div class="section-title">
+    <h2>Galeri Kegiatan</h2>
+    <p>Dokumentasi momen berharga</p>
+  </div>
+  <div class="galeri-tabs">
+    <button class="tab-btn active" onclick="switchTab('foto', this)">📷 Foto</button>
+    <button class="tab-btn" onclick="switchTab('video', this)">🎥 Video</button>
+  </div>
+  <div class="galeri-grid" id="galeriGrid"></div>
+</section>
+
+<!-- SOSMED -->
+<section class="sosmed-section" id="sosmed">
+  <div class="section-title">
+    <h2>Ikuti Kami</h2>
+    <p>Tetap terhubung di media sosial</p>
+  </div>
+  <div class="sosmed-grid" id="sosmedGrid"></div>
+</section>
+
+<footer>
+  <p>&copy; 2026 OSIS SMK DT Full Day. All Rights Reserved.</p>
+</footer>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>🛠️ Dashboard Admin</h2>
+      <button class="close-btn" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-body">
+      <div class="admin-sidebar">
+        <button class="admin-tab active" onclick="showAdminTab('dashboard', this)">📊 Dashboard</button>
+        <button class="admin-tab" onclick="showAdminTab('hero', this)">🏠 Hero</button>
+        <button class="admin-tab" onclick="showAdminTab('visimisi', this)">🎯 Visi Misi</button>
+        <button class="admin-tab" onclick="showAdminTab('kabinet', this)">🏛️ Kabinet</button>
+        <button class="admin-tab" onclick="showAdminTab('anggota', this)">👥 Anggota</button>
+        <button class="admin-tab" onclick="showAdminTab('proker', this)">📋 Program Kerja</button>
+        <button class="admin-tab" onclick="showAdminTab('foto', this)">📷 Upload Foto</button>
+        <button class="admin-tab" onclick="showAdminTab('video', this)">🎥 Upload Video</button>
+        <button class="admin-tab" onclick="showAdminTab('sosmed', this)">🔗 Sosial Media</button>
+      </div>
+      <div class="admin-content">
+        
+        <!-- DASHBOARD -->
+        <div class="admin-section active" id="admin-dashboard">
+          <h3 style="margin-bottom:20px;">Selamat Datang, Admin!</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;">
+            <div style="background:var(--gradient);color:white;padding:20px;border-radius:12px;">
+              <div style="font-size:2rem;font-weight:bold;" id="statAnggota">0</div>
+              <div>Anggota</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#10b981,#059669);color:white;padding:20px;border-radius:12px;">
+              <div style="font-size:2rem;font-weight:bold;" id="statProker">0</div>
+              <div>Program Kerja</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#f59e0b,#d97706);color:white;padding:20px;border-radius:12px;">
+              <div style="font-size:2rem;font-weight:bold;" id="statFoto">0</div>
+              <div>Foto</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:white;padding:20px;border-radius:12px;">
+              <div style="font-size:2rem;font-weight:bold;" id="statVideo">0</div>
+              <div>Video</div>
+            </div>
+          </div>
+          <div style="margin-top:30px;padding:20px;background:#f8fafc;border-radius:12px;">
+            <h4 style="margin-bottom:10px;">💡 Tips</h4>
+            <p style="color:#64748b;">Gunakan menu di sebelah kiri untuk mengedit konten website. Semua perubahan tersimpan otomatis di browser.</p>
+            <button class="btn btn-danger" style="margin-top:15px;" onclick="resetData()">🔄 Reset Semua Data</button>
+          </div>
+        </div>
+
+        <!-- HERO -->
+        <div class="admin-section" id="admin-hero">
+          <h3 style="margin-bottom:20px;">Edit Konten Utama</h3>
+          <div class="form-group">
+            <label>Judul Utama</label>
+            <input type="text" id="editHeroTitle">
+          </div>
+          <div class="form-group">
+            <label>Subtitle</label>
+            <textarea id="editHeroSubtitle"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Badge (Periode)</label>
+            <input type="text" id="editHeroBadge">
+          </div>
+          <button class="btn btn-primary" onclick="saveHero()">💾 Simpan</button>
+        </div>
+
+        <!-- VISI MISI -->
+        <div class="admin-section" id="admin-visimisi">
+          <h3 style="margin-bottom:20px;">Edit Visi & Misi</h3>
+          <div class="form-group">
+            <label>Visi</label>
+            <textarea id="editVisi" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Misi (satu per baris)</label>
+            <textarea id="editMisi" rows="6"></textarea>
+          </div>
+          <button class="btn btn-primary" onclick="saveVisiMisi()">💾 Simpan</button>
+        </div>
+
+        <!-- KABINET -->
+        <div class="admin-section" id="admin-kabinet">
+          <h3 style="margin-bottom:20px;">Edit Kabinet</h3>
+          <div class="form-group">
+            <label>
